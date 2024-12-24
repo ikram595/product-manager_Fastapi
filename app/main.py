@@ -11,7 +11,6 @@ from slowapi.util import get_remote_address
 from fastapi import FastAPI
 from fastapi.middleware.trustedhost import TrustedHostMiddleware
 from slowapi.errors import RateLimitExceeded
-from app.seed import seed_data
 
 limiter = Limiter(key_func=get_remote_address)
 app = FastAPI()
@@ -35,4 +34,3 @@ app.include_router(productRouter, prefix="/products", tags=["products"])
 app.include_router(authRouter, prefix="/auth", tags=["authentication"])
 
 database.Base.metadata.create_all(bind=database.engine)#create tables in db
-seed_data()#seed data
